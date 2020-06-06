@@ -6,6 +6,10 @@ const config = require('../config');
 const { badge } = require('../lib/badge');
 
 const sanitize = require('sanitize');
+const EmailValidation = require('emailvalid');
+const ev = new EmailValidation({
+  allowFreemail: true
+});
 
 router.get('/', function(req, res) {
   res.setLocale(config.locale);
@@ -15,7 +19,18 @@ router.get('/', function(req, res) {
 });
 
 router.post('/invite', function(req, res) {
+
+
   if (req.body.email && (!config.inviteToken || (!!config.inviteToken && req.body.token === config.inviteToken))) {
+    // Validate email format and whether it uses a temporary email service
+    let evResult = ev.check(req.body.email);
+    if (!evResult.valid) {
+      res.render('result', {
+        community: config.community,
+        message: 'We\'re having trouble confirming your email address. Please try another one.',
+        isFailed: true
+      });
+    }
     function doInvite() {
       request.post({
           url: 'https://'+ config.slackUrl + '/api/users.admin.invite',
