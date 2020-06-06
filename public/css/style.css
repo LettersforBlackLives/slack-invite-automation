@@ -7,6 +7,11 @@ header h1, header h2 {
   color: #000;
 }
 
+button {
+  font-size: 1.15rem;
+  cursor: pointer;
+}
+
 /* Accordion styles via https://codepen.io/raubaca/pen/PZzpVe */
 .onboarding {
   /* overflow: hidden; */

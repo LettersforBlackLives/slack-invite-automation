@@ -4,21 +4,22 @@ style.
     max-width: 400px;
     border-color: #999;
     padding: 12px 24px;
-    font-size: 1.25rem;
+    font-size: 1.15rem;
   }
   input[type="submit"] {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     background: #4287f5;
     color: #fff;
     padding: 12px 36px;
     cursor: pointer;
+    font-weight: bold;
   }
 br
 form#join-form.form(method="POST", action="invite")
   input(type="email", name="email", required, placeholder=__('ENTER_EMAIL'))#slack-email.field
   if tokenRequired
     input(type="text", name="token", placeholder=__('ENTER_TOKEN'))#slack-token.field
-  input(type="submit", value="Send Slack Join Invite").submit
+  input(type="submit", value="Send Slack Invite").submit
   br
   br
   if !!recaptchaSiteKey
